@@ -44,16 +44,3 @@ public class ChessPiece {
     }
 }
 
-enum Piece {
-    PAWN,
-    ROOK,
-    KNIGHT,
-    BISHOP,
-    QUEEN,
-    KING;
-}
-
-enum Color {
-    BLACK,
-    WHITE;
-}

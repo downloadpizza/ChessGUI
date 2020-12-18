@@ -57,6 +57,7 @@ public class ChessGUI implements ModInitializer {
                 GLFW.GLFW_KEY_P,
                 KEYBIND_CATEGORY));
 
+        sbg.setWhite(cbg.isWhiteSide());
 
         ClientTickEvents.END_CLIENT_TICK.register(e ->
         {
@@ -73,6 +74,10 @@ public class ChessGUI implements ModInitializer {
             }
 
             ChessPiece[][] newBoard = getBoard();
+            boolean white = cbg.isWhiteSide();
+            if(white != sbg.isWhite()) {
+                sbg.setWhite(white);
+            }
 
             if(newBoard == null) {
                 lastBoard = null;

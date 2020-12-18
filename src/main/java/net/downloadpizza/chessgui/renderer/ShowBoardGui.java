@@ -1,10 +1,7 @@
 package net.downloadpizza.chessgui.renderer;
 
-import io.github.cottonmc.cotton.gui.client.BackgroundPainter;
 import io.github.cottonmc.cotton.gui.client.LightweightGuiDescription;
-import io.github.cottonmc.cotton.gui.client.ScreenDrawing;
 import io.github.cottonmc.cotton.gui.widget.*;
-import net.downloadpizza.chessgui.board.ChessPiece;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.util.Identifier;
@@ -36,7 +33,6 @@ public class ShowBoardGui extends LightweightGuiDescription {
 
     public static final int pieceSize = 25;
 
-
     private final WSprite[] leftLabels = newSpriteArray();
     private final WSprite[] rightLabels = newSpriteArray();
     private final WSprite[] topLabels = newSpriteArray();
@@ -50,8 +46,11 @@ public class ShowBoardGui extends LightweightGuiDescription {
         return sprites;
     }
 
+    private boolean white = false;
+
     ChessBoardRenderer cbr;
     public ShowBoardGui(ChessBoardRenderer cbr) {
+        setWhite(false);
         this.cbr = cbr;
         WGridPanel root = new WGridPanel(pieceSize);
         setRootPanel(root);
@@ -69,6 +68,22 @@ public class ShowBoardGui extends LightweightGuiDescription {
         root.add(cbr, 1, 1, 8, 8);
     }
 
+    public void setWhite(boolean white) {
+        this.white = white;
 
+        for (int i = 0; i < 8; i++) {
+            int rowIndex = white ? 7 - i : i;
+            int columnIndex = white ? i : 7 - i;
+            leftLabels[i].setImage(ROWS[rowIndex]);
+            rightLabels[i].setImage(ROWS[rowIndex]);
+
+            topLabels[i].setImage(COLUMNS[columnIndex]);
+            bottomLabels[i].setImage(COLUMNS[columnIndex]);
+        }
+    }
+
+    public boolean isWhite() {
+        return white;
+    }
 }
 
