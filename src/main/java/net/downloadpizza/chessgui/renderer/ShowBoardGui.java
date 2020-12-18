@@ -1,0 +1,74 @@
+package net.downloadpizza.chessgui.renderer;
+
+import io.github.cottonmc.cotton.gui.client.BackgroundPainter;
+import io.github.cottonmc.cotton.gui.client.LightweightGuiDescription;
+import io.github.cottonmc.cotton.gui.client.ScreenDrawing;
+import io.github.cottonmc.cotton.gui.widget.*;
+import net.downloadpizza.chessgui.board.ChessPiece;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.util.Identifier;
+
+@Environment(EnvType.CLIENT)
+public class ShowBoardGui extends LightweightGuiDescription {
+    private static final Identifier[] ROWS = {
+            new Identifier("font", "1.png"),
+            new Identifier("font", "2.png"),
+            new Identifier("font", "3.png"),
+            new Identifier("font", "4.png"),
+            new Identifier("font", "5.png"),
+            new Identifier("font", "6.png"),
+            new Identifier("font", "7.png"),
+            new Identifier("font", "8.png")
+    };
+    private static final Identifier[] COLUMNS = {
+            new Identifier("font", "a.png"),
+            new Identifier("font", "b.png"),
+            new Identifier("font", "c.png"),
+            new Identifier("font", "d.png"),
+            new Identifier("font", "e.png"),
+            new Identifier("font", "f.png"),
+            new Identifier("font", "g.png"),
+            new Identifier("font", "h.png")
+    };
+
+    private static final Identifier EMPTY_FIELD = new Identifier("pieces", "empty.png");
+
+    public static final int pieceSize = 25;
+
+
+    private final WSprite[] leftLabels = newSpriteArray();
+    private final WSprite[] rightLabels = newSpriteArray();
+    private final WSprite[] topLabels = newSpriteArray();
+    private final WSprite[] bottomLabels = newSpriteArray();
+
+    private static WSprite[] newSpriteArray() {
+        WSprite[] sprites = new WSprite[8];
+        for (int i = 0; i < 8; i++) {
+            sprites[i] = new WSprite(EMPTY_FIELD);
+        }
+        return sprites;
+    }
+
+    ChessBoardRenderer cbr;
+    public ShowBoardGui(ChessBoardRenderer cbr) {
+        this.cbr = cbr;
+        WGridPanel root = new WGridPanel(pieceSize);
+        setRootPanel(root);
+
+        root.setSize(pieceSize * 10, pieceSize * 10);
+
+        for (int i = 0; i < 8; i++) {
+            root.add(leftLabels[i], 0, i + 1, 1, 1);
+            root.add(rightLabels[i], 9, i + 1, 1, 1);
+
+            root.add(topLabels[i], i + 1, 0, 1, 1);
+            root.add(bottomLabels[i], i + 1, 9, 1, 1);
+        }
+
+        root.add(cbr, 1, 1, 8, 8);
+    }
+
+
+}
+

@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "chess_gui",
+  "version": "${version}",
+  "name": "ChessGUI",
+  "description": "",
+  "authors": [],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/ChessGUI/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "main": [
+      "net.downloadpizza.chessgui.ChessGUI"
+    ]
+  },
+  "mixins": [
+    "ChessGUI.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.10.8",
+    "fabric": "*",
+    "minecraft": "1.16.4"
+  }
+}
