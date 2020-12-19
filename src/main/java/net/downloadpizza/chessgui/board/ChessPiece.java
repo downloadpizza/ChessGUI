@@ -2,12 +2,14 @@ package net.downloadpizza.chessgui.board;
 
 import net.minecraft.util.Identifier;
 
+import static net.downloadpizza.chessgui.ChessGUI.NAMESPACE;
+
 public class ChessPiece {
     private final Piece piece;
     private final Color color;
 
     public Identifier getPath() {
-        return new Identifier("pieces", color.name().toLowerCase()+"/"+piece.name().toLowerCase()+".png");
+        return new Identifier(NAMESPACE, "pieces/" + color.name().toLowerCase()+"/"+piece.name().toLowerCase()+".png");
     }
 
     public static ChessPiece pieceOrNull(String name) {

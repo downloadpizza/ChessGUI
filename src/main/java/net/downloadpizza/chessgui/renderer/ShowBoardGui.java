@@ -6,30 +6,32 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.util.Identifier;
 
+import static net.downloadpizza.chessgui.ChessGUI.NAMESPACE;
+
 @Environment(EnvType.CLIENT)
 public class ShowBoardGui extends LightweightGuiDescription {
     private static final Identifier[] ROWS = {
-            new Identifier("font", "1.png"),
-            new Identifier("font", "2.png"),
-            new Identifier("font", "3.png"),
-            new Identifier("font", "4.png"),
-            new Identifier("font", "5.png"),
-            new Identifier("font", "6.png"),
-            new Identifier("font", "7.png"),
-            new Identifier("font", "8.png")
+            new Identifier(NAMESPACE, "font/1.png"),
+            new Identifier(NAMESPACE, "font/2.png"),
+            new Identifier(NAMESPACE, "font/3.png"),
+            new Identifier(NAMESPACE, "font/4.png"),
+            new Identifier(NAMESPACE, "font/5.png"),
+            new Identifier(NAMESPACE, "font/6.png"),
+            new Identifier(NAMESPACE, "font/7.png"),
+            new Identifier(NAMESPACE, "font/8.png")
     };
     private static final Identifier[] COLUMNS = {
-            new Identifier("font", "a.png"),
-            new Identifier("font", "b.png"),
-            new Identifier("font", "c.png"),
-            new Identifier("font", "d.png"),
-            new Identifier("font", "e.png"),
-            new Identifier("font", "f.png"),
-            new Identifier("font", "g.png"),
-            new Identifier("font", "h.png")
+            new Identifier(NAMESPACE, "font/a.png"),
+            new Identifier(NAMESPACE, "font/b.png"),
+            new Identifier(NAMESPACE, "font/c.png"),
+            new Identifier(NAMESPACE, "font/d.png"),
+            new Identifier(NAMESPACE, "font/e.png"),
+            new Identifier(NAMESPACE, "font/f.png"),
+            new Identifier(NAMESPACE, "font/g.png"),
+            new Identifier(NAMESPACE, "font/h.png")
     };
-
-    private static final Identifier EMPTY_FIELD = new Identifier("pieces", "empty.png");
+    
+    private static final Identifier EMPTY_FIELD = new Identifier(NAMESPACE, "pieces/empty.png");
 
     public static final int pieceSize = 25;
 

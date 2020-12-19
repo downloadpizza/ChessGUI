@@ -9,9 +9,11 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.util.Identifier;
 
+import static net.downloadpizza.chessgui.ChessGUI.NAMESPACE;
+
 @Environment(EnvType.CLIENT)
 public class ChessBoardRenderer extends WGridPanel {
-    private static final Identifier EMPTY_FIELD = new Identifier("pieces", "empty.png");
+    private static final Identifier EMPTY_FIELD = new Identifier(NAMESPACE, "pieces/empty.png");
     //                                 aarrggbb
     private static final int BLACK = 0xff333333;
     private static final int WHITE = 0xffffffff;
@@ -38,7 +40,7 @@ public class ChessBoardRenderer extends WGridPanel {
                     int color = whiteField ? WHITE : BLACK;
                     if (highlight[x][y]) {
                         ScreenDrawing.coloredRect(left + x * size, top + y * size, size, size, RED);
-                        ScreenDrawing.coloredRect(2 + left + x * size, 2 + top + y * size, size - 4, size - 4, color);
+                        ScreenDrawing.coloredRect(1 + left + x * size, 1 + top + y * size, size - 2, size - 2, color);
                     } else {
                         ScreenDrawing.coloredRect(left + x * size, top + y * size, size, size, color);
                     }

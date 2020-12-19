@@ -27,6 +27,8 @@ import java.util.Objects;
 
 @Environment(EnvType.CLIENT)
 public class ChessGUI implements ModInitializer {
+    public static final String NAMESPACE = "chess_gui";
+
     private static final String KEYBIND_CATEGORY = "Chess Keybindings";
 
     private final ChangeBoardGui cbg = new ChangeBoardGui();
@@ -67,13 +69,17 @@ public class ChessGUI implements ModInitializer {
             if (displayBoard.isPressed())
                 MinecraftClient.getInstance().openScreen(new PizzaScreen(sbg));
 
+            ChessPiece[][] newBoard = getBoard();
+
             if (toggleDiff.wasPressed()) {
                 showDiff = !showDiff;
                 assert MinecraftClient.getInstance().player != null;
                 MinecraftClient.getInstance().player.sendMessage(Text.of("Diff toggled " + (showDiff ? "on" : "off")), true);
+                if(newBoard != null)
+                    cbr.redrawNormal(newBoard);
+                return;
             }
 
-            ChessPiece[][] newBoard = getBoard();
             boolean white = cbg.isWhiteSide();
             if(white != sbg.isWhite()) {
                 sbg.setWhite(white);

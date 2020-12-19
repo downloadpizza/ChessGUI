@@ -7,16 +7,14 @@
   "authors": [],
   "contact": {},
   "license": "MIT",
-  "icon": "assets/ChessGUI/icon.png",
+  "icon": "assets/chess_gui/icon.png",
   "environment": "client",
   "entrypoints": {
     "main": [
       "net.downloadpizza.chessgui.ChessGUI"
     ]
   },
-  "mixins": [
-    "ChessGUI.mixins.json"
-  ],
+  "mixins": [],
   "depends": {
     "fabricloader": ">=0.10.8",
     "fabric": "*",
