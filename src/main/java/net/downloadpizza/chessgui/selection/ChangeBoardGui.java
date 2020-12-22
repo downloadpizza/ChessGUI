@@ -10,6 +10,7 @@ import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.text.LiteralText;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.world.World;
 
 import java.util.function.Consumer;
 
@@ -96,7 +97,9 @@ public class ChangeBoardGui extends LightweightGuiDescription {
             int y = yTextField.getValue();
             int z = zTextField.getValue();
 
-            return new BlockPos(x, y, z);
+
+            BlockPos bp = new BlockPos(x, y, z);
+            return World.isValid(bp) ? bp : null;
         } catch (NumberFormatException e) {
             return null;
         }

@@ -148,6 +148,9 @@ public class ChessGUI implements ModInitializer {
 
         for (int x = 0; x < 8; x++) {
             BlockPos current = cbg.getBlock();
+            if(current == null)
+                return null;
+
             for (int i = 0; i < x*spacing; i++) {
                 current = current.add(cornerDirection.getXBoardOffset().getVector());
             }
