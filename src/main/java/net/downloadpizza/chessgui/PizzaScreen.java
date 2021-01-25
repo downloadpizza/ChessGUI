@@ -1,4 +1,4 @@
-package net.downloadpizza.chessgui.renderer;
+package net.downloadpizza.chessgui;
 
 import io.github.cottonmc.cotton.gui.GuiDescription;
 import io.github.cottonmc.cotton.gui.client.CottonClientScreen;

@@ -44,5 +44,38 @@ public class ChessPiece {
         if (piece != that.piece) return false;
         return color == that.color;
     }
+
+    public String fenString() {
+        String pieceString;
+
+        switch(piece) {
+            case PAWN:
+                pieceString = "p";
+                break;
+            case ROOK:
+                pieceString = "r";
+                break;
+            case KNIGHT:
+                pieceString = "n";
+                break;
+            case BISHOP:
+                pieceString = "b";
+                break;
+            case QUEEN:
+                pieceString = "q";
+                break;
+            case KING:
+                pieceString = "k";
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + piece);
+        }
+
+        if(color == Color.BLACK) {
+            return pieceString.toLowerCase();
+        } else {
+            return pieceString.toUpperCase();
+        }
+    }
 }
 

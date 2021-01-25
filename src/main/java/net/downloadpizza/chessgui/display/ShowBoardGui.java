@@ -1,4 +1,4 @@
-package net.downloadpizza.chessgui.renderer;
+package net.downloadpizza.chessgui.display;
 
 import io.github.cottonmc.cotton.gui.client.LightweightGuiDescription;
 import io.github.cottonmc.cotton.gui.widget.*;
@@ -68,6 +68,7 @@ public class ShowBoardGui extends LightweightGuiDescription {
         }
 
         root.add(cbr, 1, 1, 8, 8);
+        root.validate(this);
     }
 
     public void setWhite(boolean white) {

@@ -1,9 +1,10 @@
 package net.downloadpizza.chessgui;
 
 import net.downloadpizza.chessgui.board.ChessPiece;
-import net.downloadpizza.chessgui.renderer.ChessBoardRenderer;
-import net.downloadpizza.chessgui.renderer.PizzaScreen;
-import net.downloadpizza.chessgui.renderer.ShowBoardGui;
+import net.downloadpizza.chessgui.display.ChessBoardRenderer;
+import net.downloadpizza.chessgui.display.ShowBoardGui;
+import net.downloadpizza.chessgui.recorder.GameRecorder;
+import net.downloadpizza.chessgui.recorder.GameRecorderGui;
 import net.downloadpizza.chessgui.selection.ChangeBoardGui;
 import net.downloadpizza.chessgui.selection.CornerDirection;
 import net.fabricmc.api.EnvType;
@@ -34,6 +35,7 @@ public class ChessGUI implements ModInitializer {
     private final ChangeBoardGui cbg = new ChangeBoardGui();
     private final ChessBoardRenderer cbr = new ChessBoardRenderer();
     private final ShowBoardGui sbg = new ShowBoardGui(cbr);
+    private final GameRecorderGui grg = new GameRecorderGui();
 
     private boolean showDiff = false;
 
@@ -59,6 +61,12 @@ public class ChessGUI implements ModInitializer {
                 GLFW.GLFW_KEY_P,
                 KEYBIND_CATEGORY));
 
+        KeyBinding recordingMenu = KeyBindingHelper.registerKeyBinding(new KeyBinding(
+                "Configure Recording",
+                InputUtil.Type.KEYSYM,
+                GLFW.GLFW_KEY_K,
+                KEYBIND_CATEGORY));
+
         sbg.setWhite(cbg.isWhiteSide());
 
         ClientTickEvents.END_CLIENT_TICK.register(e ->
@@ -68,6 +76,9 @@ public class ChessGUI implements ModInitializer {
 
             if (displayBoard.isPressed())
                 MinecraftClient.getInstance().openScreen(new PizzaScreen(sbg));
+
+            if (recordingMenu.isPressed())
+                MinecraftClient.getInstance().openScreen(new PizzaScreen(grg));
 
             ChessPiece[][] newBoard = getBoard();
 
@@ -97,7 +108,6 @@ public class ChessGUI implements ModInitializer {
             }
 
             if(!checkBoardsEqual(newBoard, lastBoard)) {
-                System.out.println(showDiff);
                 if(showDiff) {
                     boolean[][] changes = createBoardDiff(newBoard, lastBoard);
                     cbr.redrawDiff(newBoard, changes);
@@ -105,6 +115,10 @@ public class ChessGUI implements ModInitializer {
                 } else {
                     cbr.redrawNormal(newBoard);
                 }
+
+                GameRecorder gr = grg.getRcd();
+                if(gr != null)
+                    gr.writeMove(newBoard, white);
 
                 lastBoard = newBoard;
             }
